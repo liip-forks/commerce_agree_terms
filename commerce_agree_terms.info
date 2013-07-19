@@ -1,0 +1,5 @@
+name = Commerce Agree to Terms
+description = Commerce checkout pane with a checkbox linked to your custom Terms and Conditions page
+dependencies[] = commerce
+package = Commerce (contrib)
+core = 7.x
