@@ -1,6 +1,12 @@
 <?php
 
 /**
+ * @file
+ * Defines a checkout pane for Terms and Conditions
+ *
+ */
+
+/**
  * Implements hook_commerce_checkout_pane_info()
  */
 function commerce_agree_terms_commerce_checkout_pane_info() {  

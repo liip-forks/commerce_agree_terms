@@ -1,6 +1,12 @@
 <?php
 
 /**
+ * @file
+ * Defines settings form and checkbox for checkout pane
+ *
+ */
+
+/**
  * Implements base_settings_form()
  */
 function commerce_agree_terms_pane_settings_form($checkout_pane) {
