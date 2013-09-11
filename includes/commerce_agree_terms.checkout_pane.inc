@@ -5,6 +5,7 @@
  * Defines settings form and checkbox for checkout pane
  *
  */
+
 /**
  * Implements base_settings_form().
  */
@@ -32,13 +33,13 @@ function commerce_agree_terms_pane_settings_form($checkout_pane) {
  */
 function commerce_agree_terms_pane_checkout_form($form, $form_state, $checkout_pane, $order) {
   $checkout_form['commerce_agree_terms_pane_field_display'] = array(
-    '#markup' => variable_get('commerce_agree_terms_pane_field', '')
+    '#markup' => variable_get('commerce_agree_terms_pane_field', ''),
   );
   $checkout_form['commerce_agree_terms_pane_field'] = array(
     '#type' => 'checkbox',
     '#title' => t('I agree to the <a href="@url">@title</a>', array(
       '@url' => base_path() . variable_get('commerce_agree_terms_pane_node'),
-      '@title' => variable_get('commerce_agree_terms_pane_title')
+      '@title' => variable_get('commerce_agree_terms_pane_title'),
     )),
     '#required' => TRUE,
   );
