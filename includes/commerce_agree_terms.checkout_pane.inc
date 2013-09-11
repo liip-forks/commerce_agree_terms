@@ -3,7 +3,6 @@
 /**
  * @file
  * Defines settings form and checkbox for checkout pane
- *
  */
 
 /**
