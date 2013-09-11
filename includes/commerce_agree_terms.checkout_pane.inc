@@ -5,9 +5,8 @@
  * Defines settings form and checkbox for checkout pane
  *
  */
-
 /**
- * Implements base_settings_form()
+ * Implements base_settings_form().
  */
 function commerce_agree_terms_pane_settings_form($checkout_pane) {
   $form = array();
@@ -29,7 +28,7 @@ function commerce_agree_terms_pane_settings_form($checkout_pane) {
 }
 
 /**
- * Implements base_checkout_form()
+ * Implements base_checkout_form().
  */
 function commerce_agree_terms_pane_checkout_form($form, $form_state, $checkout_pane, $order) {
   $checkout_form['commerce_agree_terms_pane_field_display'] = array(
