@@ -48,6 +48,7 @@ function commerce_agree_terms_pane_checkout_form($form, $form_state, $checkout_p
   $title = variable_get('commerce_agree_terms_pane_title');
   $link_url = variable_get('commerce_agree_terms_pane_node');
   
+  // build the link, in the same window or a new one.
   if (variable_get('commerce_agree_terms_new_window') == 0) {
     $link = l($title, $link_url);
   } else {
@@ -57,8 +58,10 @@ function commerce_agree_terms_pane_checkout_form($form, $form_state, $checkout_p
       ),
     ));
   }
+  // position the link in the label using the %terms placeholder
   $label = strtr( variable_get('commerce_agree_terms_checkbox_label'), array('%terms' => $link) );
   
+  // create the checkbox
   $checkout_form['commerce_agree_terms_pane_field_display'] = array(
     '#markup' => variable_get('commerce_agree_terms_pane_field', ''),
   );
