@@ -10,7 +10,7 @@
  */
 function commerce_agree_terms_pane_settings_form($checkout_pane) {
   $form = array();
-  
+
   $form['commerce_agree_terms_pane_title'] = array(
     '#type' => 'textfield',
     '#title' => t('Pane title'),
@@ -51,7 +51,7 @@ function commerce_agree_terms_pane_checkout_form($form, $form_state, $checkout_p
   // Build the link, in the same window or a new one.
   if (variable_get('commerce_agree_terms_new_window') == 0) {
     $link = l($title, $link_url);
-  } 
+  }
   else {
     $link = l($title, $link_url, array(
       'attributes' => array(
