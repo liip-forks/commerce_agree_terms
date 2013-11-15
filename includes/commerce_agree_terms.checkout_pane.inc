@@ -44,24 +44,25 @@ function commerce_agree_terms_pane_settings_form($checkout_pane) {
  * Implements base_checkout_form().
  */
 function commerce_agree_terms_pane_checkout_form($form, $form_state, $checkout_pane, $order) {
-  
+
   $title = variable_get('commerce_agree_terms_pane_title');
   $link_url = variable_get('commerce_agree_terms_pane_node');
-  
-  // build the link, in the same window or a new one.
+
+  // Build the link, in the same window or a new one.
   if (variable_get('commerce_agree_terms_new_window') == 0) {
     $link = l($title, $link_url);
-  } else {
+  } 
+  else {
     $link = l($title, $link_url, array(
       'attributes' => array(
         'target' => '_blank',
       ),
     ));
   }
-  // position the link in the label using the %terms placeholder
-  $label = strtr( variable_get('commerce_agree_terms_checkbox_label'), array('%terms' => $link) );
-  
-  // create the checkbox
+  // Position the link in the label using the %terms placeholder.
+  $label = strtr(variable_get('commerce_agree_terms_checkbox_label'), array('%terms' => $link));
+
+  // Create the checkbox.
   $checkout_form['commerce_agree_terms_pane_field_display'] = array(
     '#markup' => variable_get('commerce_agree_terms_pane_field', ''),
   );
