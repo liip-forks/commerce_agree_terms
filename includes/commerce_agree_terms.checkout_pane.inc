@@ -21,7 +21,7 @@ function commerce_agree_terms_pane_settings_form($checkout_pane) {
     '#type' => 'textfield',
     '#title' => t('Checkbox label'),
     '#default_value' => variable_get('commerce_agree_terms_checkbox_label', t('I agree with the %terms')),
-    '#description' => t('%terms is the link (opening in a new tab) with the pane title as the link text'),
+    '#description' => t('%terms is the link with the pane title as the link text'),
     '#required' => TRUE,
   );
   $form['commerce_agree_terms_pane_node'] = array(
@@ -35,6 +35,13 @@ function commerce_agree_terms_pane_settings_form($checkout_pane) {
     '#type' => 'checkbox',
     '#title' => t('Open the link in a new window'),
     '#default_value' => variable_get('commerce_agree_terms_new_window', 1),
+  );
+  $form['commerce_agree_terms_checkbox_error'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Error message'),
+    '#default_value' => variable_get('commerce_agree_terms_checkbox_error', t('You must agree with the %terms before continuing')),
+    '#description' => t('User friendly message to show if the customer fails to check the checkbox'),
+    '#required' => TRUE,
   );
 
   return $form;
@@ -74,4 +81,33 @@ function commerce_agree_terms_pane_checkout_form($form, $form_state, $checkout_p
     '#required' => TRUE,
   );
   return $checkout_form;
+}
+
+/**
+ * Implements base_checkout_form_validate().
+ */
+function commerce_agree_terms_pane_checkout_form_validate($form, &$form_state) {
+
+  $title = variable_get('commerce_agree_terms_pane_title', t('Terms and Conditions'));
+  $error_message = strtr(variable_get('commerce_agree_terms_checkbox_error', t('You must agree with the %terms before continuing')), array(
+    '%terms' => $title,
+  ));
+
+  if (form_get_errors()) {
+    // Clear the fields default error message.
+    $form_errors = form_get_errors();
+    $drupal_errors = drupal_get_messages('error');
+
+    form_clear_error();
+    foreach($drupal_errors['error'] as $key => $error) {
+      if (in_array($error, $form_errors)) {
+        unset($drupal_errors['error'][$key]);
+      }
+    }
+
+    // Set our custom error message.
+    if ($form_state['values']['terms_conditions']['commerce_agree_terms_pane_field'] === 0) {
+      form_set_error('commerce_agree_terms_pane_field', $error_message);
+    }
+  }
 }
