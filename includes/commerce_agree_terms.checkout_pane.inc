@@ -86,7 +86,7 @@ function commerce_agree_terms_pane_checkout_form($form, $form_state, $checkout_p
 /**
  * Implements base_checkout_form_validate().
  */
-function commerce_agree_terms_pane_checkout_form_validate($form, &$form_state) {
+function commerce_agree_terms_commerce_checkout_form_validate($form, &$form_state) {
 
   $title = variable_get('commerce_agree_terms_pane_title', t('Terms and Conditions'));
   $error_message = strtr(variable_get('commerce_agree_terms_checkbox_error', t('You must agree with the %terms before continuing')), array(
