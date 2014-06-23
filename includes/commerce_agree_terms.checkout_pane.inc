@@ -99,9 +99,11 @@ function commerce_agree_terms_pane_checkout_form_validate($form, &$form_state) {
     $drupal_errors = drupal_get_messages('error');
 
     form_clear_error();
-    foreach($drupal_errors['error'] as $key => $error) {
-      if (in_array($error, $form_errors)) {
-        unset($drupal_errors['error'][$key]);
+    if (!empty($drupal_errors['error'])) {
+      foreach($drupal_errors['error'] as $key => $error) {
+        if (in_array($error, $form_errors)) {
+          unset($drupal_errors['error'][$key]);
+        }
       }
     }
 
