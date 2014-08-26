@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Defines settings form and checkbox for checkout pane
+ * Defines settings form and checkbox for checkout pane.
  */
 
 /**
@@ -100,7 +100,7 @@ function commerce_agree_terms_pane_checkout_form_validate($form, &$form_state) {
 
     form_clear_error();
     if (!empty($drupal_errors['error'])) {
-      foreach($drupal_errors['error'] as $key => $error) {
+      foreach ($drupal_errors['error'] as $key => $error) {
         if (in_array($error, $form_errors)) {
           unset($drupal_errors['error'][$key]);
         }
@@ -112,7 +112,8 @@ function commerce_agree_terms_pane_checkout_form_validate($form, &$form_state) {
       form_set_error('commerce_agree_terms_pane_field', $error_message);
       return FALSE;
     }
-  } else {
+  }
+  else {
     return TRUE;
   }
 }
