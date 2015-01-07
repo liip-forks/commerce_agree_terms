@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements base_settings_form().
+ * Settings form callback for the pane.
  */
 function commerce_agree_terms_pane_settings_form($checkout_pane) {
   $form = array();
@@ -72,9 +72,6 @@ function commerce_agree_terms_pane_checkout_form($form, $form_state, $checkout_p
   ));
 
   // Create the checkbox.
-  $checkout_form['commerce_agree_terms_pane_field_display'] = array(
-    '#markup' => variable_get('commerce_agree_terms_pane_field', ''),
-  );
   $checkout_form['commerce_agree_terms_pane_field'] = array(
     '#type' => 'checkbox',
     '#title' => $label,
@@ -89,12 +86,13 @@ function commerce_agree_terms_pane_checkout_form($form, $form_state, $checkout_p
 function commerce_agree_terms_pane_checkout_form_validate($form, &$form_state) {
 
   $title = variable_get('commerce_agree_terms_pane_title', t('Terms and Conditions'));
-  $error_message = strtr(variable_get('commerce_agree_terms_checkbox_error', t('You must agree with the %terms before continuing')), array(
+  $error_message = filter_xss_admin(strtr(variable_get('commerce_agree_terms_checkbox_error', t('You must agree with the %terms before continuing')), array(
     '%terms' => $title,
-  ));
+  )));
 
   if (form_get_errors()) {
-    // Clear the fields default error message.
+    // Clear the fields default error message because we are adding a custom one below.
+    // If we don't clear it we will get two errors on the field.
     $form_errors = form_get_errors();
     $drupal_errors = drupal_get_messages('error');
 
