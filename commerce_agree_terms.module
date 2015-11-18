@@ -22,3 +22,24 @@ function commerce_agree_terms_commerce_checkout_pane_info() {
 
   return $checkout_panes;
 }
+
+/**
+ * Implements hook_menu().
+ */
+function commerce_agree_terms_menu() {
+  $items = array();
+
+  if (module_exists('i18n_variable')) {
+    $items['admin/commerce/config/checkout/terms_conditions'] = array(
+      'title' => 'Commerce Agree Terms multilingual',
+      'description' => 'Administer Commerce Agree Terms.',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('variable_group_form', 'commerce_agree_terms'),
+      'access arguments' => array('configure store'),
+      'type' => MENU_NORMAL_ITEM,
+      'weight' => 99,
+    );
+  }
+
+  return $items;
+}
