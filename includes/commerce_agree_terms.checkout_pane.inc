@@ -86,7 +86,7 @@ function commerce_agree_terms_pane_checkout_form($form, $form_state, $checkout_p
 function commerce_agree_terms_pane_checkout_form_validate($form, &$form_state) {
 
   $title = variable_get('commerce_agree_terms_pane_title', t('Terms and Conditions'));
-  $error_message = filter_xss_admin(strtr(variable_get('commerce_agree_terms_checkbox_error', t('You must agree with the %terms before continuing')), array(
+  $error_message = filter_xss_admin(strtr(variable_get('commerce_agree_terms_checkbox_error', t('You must agree with the %terms before continuing.')), array(
     '%terms' => $title,
   )));
 
@@ -96,6 +96,7 @@ function commerce_agree_terms_pane_checkout_form_validate($form, &$form_state) {
     $form_errors = form_get_errors();
     $drupal_errors = drupal_get_messages('error');
 
+    // Clear form errors.
     form_clear_error();
     if (!empty($drupal_errors['error'])) {
       foreach ($drupal_errors['error'] as $key => $error) {
@@ -105,7 +106,12 @@ function commerce_agree_terms_pane_checkout_form_validate($form, &$form_state) {
       }
     }
 
-    // Set our custom error message.
+    // Rebuild drupal errors.
+    foreach($drupal_errors['error'] as $key => $message) {
+      drupal_set_message($message, 'error');
+    }
+
+    // Validate form field and set our custom error message.
     if ($form_state['values']['terms_conditions']['commerce_agree_terms_pane_field'] === 0) {
       form_set_error('commerce_agree_terms_pane_field', $error_message);
       return FALSE;
