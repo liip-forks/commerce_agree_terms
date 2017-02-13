@@ -24,12 +24,12 @@ class AgreeTerms extends CheckoutPaneBase implements CheckoutPaneInterface {
    */
   public function defaultConfiguration() {
     return [
-      'nid' => NULL,
-      'link_text' => 'I agree with the %terms',
-      'prefix_text' => 'Terms and Conditions',
-      'invalid_text' => 'You must agree with the %terms before continuing',
-      'new_window' => 1,
-    ] + parent::defaultConfiguration();
+        'nid' => NULL,
+        'link_text' => 'Terms and Conditions',
+        'prefix_text' => 'I agree with the %terms',
+        'invalid_text' => 'You must agree with the %terms before continuing',
+        'new_window' => 1,
+      ] + parent::defaultConfiguration();
   }
 
   /**
@@ -146,6 +146,7 @@ class AgreeTerms extends CheckoutPaneBase implements CheckoutPaneInterface {
           '#default_value' => FALSE,
           '#title' => $this->t($prefix_text, ['%terms' => $link]),
           '#required' => TRUE,
+          '#weight' => $this->getWeight(),
         ];
       }
       else {
@@ -154,6 +155,7 @@ class AgreeTerms extends CheckoutPaneBase implements CheckoutPaneInterface {
           '#default_value' => FALSE,
           '#title' => $link,
           '#required' => TRUE,
+          '#weight' => $this->getWeight(),
         ];
       }
     }
