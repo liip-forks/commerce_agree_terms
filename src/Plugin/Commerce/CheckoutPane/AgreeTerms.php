@@ -57,7 +57,9 @@ class AgreeTerms extends CheckoutPaneBase implements CheckoutPaneInterface {
     }
     if (!empty($nid)) {
       $node = Node::load($nid);
-      $summary .= $this->t('Terms page: @title', ['@title' => $node->getTitle()]);
+      if ($node) {
+        $summary .= $this->t('Terms page: @title', ['@title' => $node->getTitle()]);
+      }
     }
 
     return $summary;
