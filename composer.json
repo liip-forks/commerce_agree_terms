@@ -5,7 +5,7 @@
     "homepage": "http://drupal.org/project/commerce_agree_terms",
     "license": "GPL-2.0+",
     "require": {
-        "drupal/core": "~8.2",
+        "drupal/core": "^8.2 || ^9",
         "drupal/commerce": "~8.2"
     },
     "minimum-stability": "dev"
